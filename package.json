@@ -1,0 +1,14 @@
+{
+  "name": "mustafa-net",
+  "module": "index.js",
+  "type": "module",
+  "scripts": {
+    "dev": "bun --watch index.js"
+  },
+  "devDependencies": {
+    "bun-types": "latest"
+  },
+  "peerDependencies": {
+    "typescript": "^5.0.0"
+  }
+}
