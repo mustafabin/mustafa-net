@@ -1,0 +1,17 @@
+{
+  "name": "reversecodes",
+  "module": "index.ts",
+  "type": "module",
+  "scripts": {
+    "start": "bun index.js"
+  },
+  "devDependencies": {
+    "bun-types": "latest"
+  },
+  "peerDependencies": {
+    "typescript": "^5.0.0"
+  },
+  "dependencies": {
+    "md5-hex": "^5.0.0"
+  }
+}

@@ -1,1 +1,3 @@
-this is in retalition to ben zahers monoply in hableyen and for exploting the mukhtars
+# reversecodes
+
+step one in trying to take zaher down is reversing aden net codes which is encrypted with md

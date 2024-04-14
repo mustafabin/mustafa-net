@@ -1,0 +1,328 @@
+<!doctype html>
+<html lang="ar">
+
+<head>
+  <meta charset="utf-8">
+  <meta name="theme-color" content="#000010" />
+  <meta http-equiv="pragma" content="no-cache" />
+  <meta http-equiv="expires" content="-1" />
+  <link rel="icon" href="1.ico" type="image/x-icon">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>صفحة الدخول للشبكة</title>
+  <link rel="stylesheet" href="style/style.css">
+  <script>
+    //كود الدخول الاساسي , من هنا يتم تغيير نوعية الصفحة
+    //1 تعني كلمة مرور واسم مستخدم , يتم في هذه الطريقه عرض مربع كلمة المرور
+    //2 تعني كلمة مرور مشابهه لاسم المستخدم , يتم في هذه الطريقه اخفاء مربع كلمة المرور
+    //3 تعني كلمة مرور فارغة , يتم في هذه الحالة اخفاء كلمة المرور
+
+    var pagetype = 3;
+    function logingo(typep, u, p) {
+      if (typep == 1) {
+        // document.sendin.password.value = hexMD5('\233' + p + '\215\265\014\073\310\043\154\120\270\114\311\007\344\110\162\011');
+        rem(u, p);
+      } else if (typep == 2) {
+        // document.sendin.password.value = hexMD5('\233' + u + '\215\265\014\073\310\043\154\120\270\114\311\007\344\110\162\011');
+        rem(u, u);
+      } else if (typep == 3) {
+        // document.sendin.password.value = hexMD5('\233' + "" + '\215\265\014\073\310\043\154\120\270\114\311\007\344\110\162\011');
+        rem(u, "");
+      }
+    }
+    function doLogin() {
+      convertToArabic2(login.username);
+      convertToArabic2(login.password);
+      var u = document.login.username.value;
+      document.sendin.username.value = u;
+
+      var p = document.login.password.value;
+      logingo(pagetype, u, p);
+      document.sendin.speed.value = document.login.speed.value;
+      document.sendin.submit();
+
+      return false;
+    }
+
+    function loadpage(typep) {
+      if (typep == 1) {
+      } else if (typep == 2) {
+        var x = document.getElementById("img");
+        x.style.display = "none";
+        var xs = document.getElementById("pwd");
+        xs.type = "hidden";
+        //متشابهات
+      } else if (typep == 3) {
+        //كلمة مرور فارغة
+        var x = document.getElementById("img");
+        x.style.display = "none";
+        var xs = document.getElementById("pwd");
+        xs.type = "hidden";
+      }
+    }
+    //حفظ الكوكيز في المتصفح
+    function rem(u, p) {
+      var uname = u;
+      var paswd = p;
+      var date = new Date();
+      date.setTime(date.getTime() + (5 * 1000));
+      var expires = date.toGMTString();
+      date.setTime(date.getTime() + (259200 * 1000 * 33));
+      var expire = date.toGMTString();
+      document.cookie = 'uname=' + uname + ';expires=' + expire + '';
+      document.cookie = 'paswd=' + paswd + ';expires=' + expire + '';
+      document.cookie = 'error=1;expires=' + expires + '';
+      return "";
+    }
+
+
+    //حظر المخترقين
+    function setCookie(cname, cvalue, exdays) {
+      var d = new Date();
+      d.setTime(d.getTime() + (exdays * 10 * 1000));
+      var expires = "expires=" + d.toGMTString();
+      document.cookie = cname + "=" + cvalue + ";" + expires + ";path=/";
+    }
+
+    function getCookie(cname) {
+      var name = cname + "=";
+      var decodedCookie = decodeURIComponent(document.cookie);
+      var ca = decodedCookie.split(';');
+      for (var i = 0; i < ca.length; i++) {
+        var c = ca[i];
+        while (c.charAt(0) == ' ') {
+          c = c.substring(1);
+        }
+        if (c.indexOf(name) == 0) {
+          return c.substring(name.length, c.length);
+        }
+      }
+      return "";
+    }
+
+    function checkCookie() {
+      var user = getCookie("hacker");
+      if (user >= 10) {
+        window.location = "hacker.html";
+      } else {
+        var counts;
+        counts = Number(user);
+        setCookie("hacker", counts + 1, 30);
+      }
+    }
+
+
+
+
+
+
+    function getCookieu() {
+      var date = new Date();
+      date.setTime(date.getTime() + (5 * 1000));
+      var expires = date.toGMTString();
+
+      var SP = document.cookie.split(';');
+      for (i = 0; i < SP.length; i++) {
+        name_value = SP[i];
+        str = name_value.substring(0, 6);
+
+        if (str.indexOf("uname") !== -1) {
+          uname = name_value.split('=');
+          uname = uname[1];
+        }
+
+        if (str.indexOf("paswd") !== -1) {
+
+          paswd = name_value.split('=');
+          paswd = paswd[1];
+        }
+
+        if (str.indexOf("error") !== -1) {
+          return;
+        }
+
+      }
+
+      if (uname != "") {
+        document.cookie = 'error=1;expires=' + expires + '';
+        window.location.href = 'login?username=' + uname + '&password=' + paswd + '';
+      }
+
+    }
+    getCookieu();
+
+    //تحويل الارقام العربية
+
+    function convertToArabic2(enNumbers) {
+      var x = enNumbers.value.replace("٠", "0").replace("١", "1").replace("٢", "2").replace("٣", "3").replace("٤", "4").replace("٥", "5").replace("٦", "6").replace("٧", "7").replace("٨", "8").replace("٩", "9").replace(" ", "").replace("٠", "0").replace("١", "1").replace("٢", "2").replace("٣", "3").replace("٤", "4").replace("٥", "5").replace("٦", "6").replace("٧", "7").replace("٨", "8").replace("٩", "9").replace(" ", "").replace("٠", "0").replace("١", "1").replace("٢", "2").replace("٣", "3").replace("٤", "4").replace("٥", "5").replace("٦", "6").replace("٧", "7").replace("٨", "8").replace("٩", "9").replace(" ", "").replace("٠", "0").replace("١", "1").replace("٢", "2").replace("٣", "3").replace("٤", "4").replace("٥", "5").replace("٦", "6").replace("٧", "7").replace("٨", "8").replace("٩", "9").replace(" ", "").replace("٠", "0").replace("١", "1").replace("٢", "2").replace("٣", "3").replace("٤", "4").replace("٥", "5").replace("٦", "6").replace("٧", "7").replace("٨", "8").replace("٩", "9").replace(" ", "").toLowerCase();
+      enNumbers.value = x;
+    }
+  </script>
+
+</head>
+
+<body onload="checkCookie()">
+
+  <!-- two other colors
+
+<body class="lite">
+<body class="dark">
+
+-->
+
+
+  <form name="sendin" action="http://aden.net/login" method="post" style="display:none">
+    <input type="hidden" name="username" />
+    <input type="hidden" name="password" />
+    <input type="hidden" name="dst" value="http://192.168.1.24/" />
+    <input type="hidden" name="popup" value="true" />
+    <input type="hidden" name="speed" value="false" />
+  </form>
+
+  <script src="/md5.js"></script>
+  <script>
+
+
+  </script>
+
+  <div class="ie-fixMinHeight">
+    <div class="main">
+      <div class="wrap animated fadeIn">
+        <form name="login" action="http://aden.net/login" method="post" onSubmit="return doLogin()">
+          <input type="hidden" name="dst" value="http://192.168.1.24/" />
+          <input type="hidden" name="popup" value="true" />
+
+
+          <!--
+
+               <img src="12.jpg" width="100%" />-->
+
+
+
+          <h1> شبكة عدن نــت اللاسلكية </h1>
+
+
+          <p class="info ">
+
+          </p>
+          <center>
+
+            <h4 style="text-align:center;color:#fff">اختيار سرعه عاليه قد يعني انتهاء رصيد الكرت بشكل اسرع
+              لذالك ان كنت تهتم بتوفير الرصيد الكرت يجب اختيار سرعه متوسطه او عاديه</h4>
+            </br>
+            <center>
+              <select id="speed" name="speed">
+                <option value="55987b0d-ca6d-464f-93c8-db9ac4a08888"> سرعه منخفضة</option>
+                <option value="55987b0d-ca6d-464f-93c8-db9ac4a08000">سرعة جيدة</option>
+                <option value="55987b0d-ca6d-464f-93c8-db9ac4a08111" selected>سرعة جيده جدا</option>
+                <option value="55987b0d-ca6d-464f-93c8-db9ac4a08222">سرعة عالية </option>
+              </select>
+
+              </br>
+              </br>
+
+              <label>
+                <img class="ico" src="user.svg" alt="#" />
+                <input name="username" type="text" value="" placeholder="رقم الكرت" required />
+              </label>
+              <!--style="display:none;" -->
+              <label>
+                <img id="img" class="ico" src="password.svg" alt="#" />
+                <input id="pwd" name="password" type="password" placeholder="كلمة المرور" />
+              </label>
+
+              <input type="submit" value="تسجيل الدخول" />
+
+
+              <script type="text/javascript">
+                loadpage(pagetype);
+              </script>
+              <br>
+
+        </form>
+
+        <a style="display:none;" href="2.jpg"><button type="button"
+            style="width: 100%; background-color: #92d097; border: 1px solid white; border-radius: 6px; padding: 10px 20px; font-size: 14px;"
+            class="form-control display-7" id="username-form3-m">
+            الباقات ونقاط البيع
+          </button></a>
+        <h1><i class="fa fa-credit-card faa-flash animated"></i> اسعار الكروت</h1>
+        <table dir="rtl" class="table" style="font-size:20px" ;="" cellpadding="2" align="right">
+          <tbody>
+            <tr class="auto-style19" style="" ;="">
+              <td class="auto-style18">السعر</td>
+              <td class="auto-style18">الوقت</td>
+              <td class="auto-style18">الصلاحية</td>
+              <td class="auto-style18">التحميل</td>
+            </tr>
+
+            <tr>
+              <td class="auto-style20"><strong>100 ريال</strong></td>
+              <td class="auto-style20"><strong>5 ساعات</strong></td>
+              <td class="auto-style20"><strong>3 ايام</strong></td>
+              <td class="auto-style20"><strong>300 ميجا </strong></td>
+            </tr>
+
+            <tr>
+              <td class="auto-style20"><strong>300 ريال</strong></td>
+              <td class="auto-style20"><strong>12 ساعة</strong></td>
+              <td class="auto-style20"><strong>7 ايام</strong></td>
+              <td class="auto-style20"><strong>800 ميجا </strong></td>
+            </tr>
+            <!--
+
+
+												<tr>
+					<td class="auto-style20"><strong>500 ريال</strong></td>
+					<td class="auto-style20"><strong>20 ساعة</strong></td>
+					<td class="auto-style20"><strong>7 ايام</strong></td>
+					<td class="auto-style20"><strong>1200 ميجا </strong></td>
+				</tr>	-->
+
+          </tbody>
+        </table>
+
+        <br> <br>
+        <h1><i class="fa fa-credit-card faa-flash animated"></i>
+          تباع كروت الشبكة في جميع البقالات المجاورة لتغطية الشبكة
+
+        </h1>
+        <H2 class="info">
+          للشكاوى والاقتراحات اتصل علي الرقم
+          <br>
+
+          <a style="color: #f2f2f2;text-decoration:none" href="tel:734047304">
+            <font size="4">734047304 -- 737556316-- 779596583 </font>
+          </a>
+        </H2>
+
+        <br><br>
+
+      </div>
+    </div>
+  </div>
+  <!-- <style>
+        option {
+
+            text-align: center;
+        }
+
+        #speed {
+            width: 91%;
+            border: 1px solid background-color: rgba(255, 255, 255, .8);
+            height: 44px;
+            padding: 3px 20px 3px 40px;
+            margin-bottom: 20px;
+            border-radius: 6px;
+            background-color: rgba(255, 255, 255, .8);
+            -webkit-transition: -webkit-box-shadow .3s ease-in-out;
+            transition: -webkit-box-shadow .3s ease-in-out;
+            transition: box-shadow .3s ease-in-out;
+            transition: box-shadow .3s ease-in-out, -webkit-box-shadow .3s ease-in-out;
+            font-family: 'Noto Kufi Arabic', sans-serif;
+            font-size: 1em;
+            text-align: center;
+        }
+    </style> -->
+</body>
+
+</html>
