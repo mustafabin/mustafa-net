@@ -1,16 +1,53 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
   <head>
-    <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <title>mustafaNet</title>
-    <meta name="description" content="">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <link rel="stylesheet" href="">
+    <meta charset="utf-8" />
+    <meta http-equiv="pragma" content="no-cache" />
+    <meta http-equiv="expires" content="-1" />
+    <meta name="viewport" content="width=device-width" />
+    <title>Lux Net - Log in</title>
+    <link rel="stylesheet" href="css/style.css" />
   </head>
+
   <body>
-    <h1>Yurr</h1>
-    <button>Click me</button>
-    <!-- <script src="" async defer></script> -->
+    $(if chap-id)
+    <form name="sendin" action="$(link-login-only)" method="post" style="display: none">
+      <input type="hidden" name="username" />
+      <input type="hidden" name="password" />
+      <input type="hidden" name="dst" value="$(link-orig)" />
+      <input type="hidden" name="popup" value="true" />
+    </form>
+
+    <script src="/md5.js"></script>
+    <script>
+      function doLogin() {
+        document.sendin.username.value = document.login.password.value
+        document.sendin.password.value = hexMD5("$(chap-id)" + document.login.password.value + "$(chap-challenge)")
+        document.sendin.submit()
+        return false
+      }
+    </script>
+    $(endif)
+    <div class="main-background" style="background-image: url(./img/luxnet.jpeg)">
+      <div class="main animated">
+        <div class="wrap wrap-div">
+          <div class="image-wrapper">
+            <img src="./img/wifilogo.png" style="width: 175px" />
+          </div>
+          <h1 class="h1-class title-gradient">Lux Net</h1>
+
+          <form name="login" action="$(link-login-only)" method="post" $(if chap-id) onSubmit="return doLogin()" $(endif)>
+            <input type="hidden" name="username" value="$(password)" />
+
+            <label>
+              <img class="ico" src="img/user.svg" alt="User Icon" />
+              <input name="password" class="password-input" placeholder="ادخل رمز الكرت هنا" required />
+            </label>
+            <p class="error-message">$(if error)$(error)$(endif)</p>
+            <input class="submit-input" type="submit" value="تسجيل الدخول" />
+          </form>
+        </div>
+      </div>
+    </div>
   </body>
 </html>
