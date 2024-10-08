@@ -1,6 +1,7 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml">
   <head>
+    <meta charset="UTF-8" />
     <title>Vouchers</title>
     <style>
       @media print {
@@ -47,13 +48,16 @@
         display: flex;
       }
       .Voucher-bottom p {
-        width: 25px;
+        width: 40px;
         background-color: #ff9d5d;
-        font-size: 8px;
+        font-size: 6px;
         font-weight: 600;
         margin-right: 5px;
         font-family: Arial, Helvetica, sans-serif;
         border-radius: 10px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
       }
       .Voucher-bottom p:last-of-type {
         margin-right: 0px;
@@ -70,9 +74,27 @@
         font-weight: 600;
         font-family: Arial, Helvetica, sans-serif;
       }
+      .Voucher-price {
+        position: absolute;
+        width: 200px;
+        height: 60px;
+        display: flex;
+        justify-content: flex-end;
+      }
+      .Voucher-price-container {
+        position: absolute;
+        background-color: #ff9d5d;
+        padding: 4px;
+      }
+      .Voucher-price p {
+        font-size: 10px;
+        font-weight: 600;
+        font-family: Arial, Helvetica, sans-serif;
+      }
     </style>
   </head>
   <body>
+
     <div class="Voucher">
       <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" stroke="#ff9d5d" stroke-width="0.504">
         <g id="SVGRepo_bgCarrier" stroke-width="0"></g>
@@ -85,7 +107,11 @@
             fill="#ffffff"></path>
         </g>
       </svg>
-
+      <div class="Voucher-price">
+        <div class="Voucher-price-container">
+          <p>ريال %u_moneyPaid%</p>
+        </div>
+      </div>
       <div class="Voucher-middle">
         <h1 class="Voucher-title">5G شبكة لوكس نت</h1>
         <div class="Voucher-code">
@@ -103,9 +129,9 @@
                 fill="black"></path>
             </g>
           </svg>
-          <p></p>
-          <p></p>
-          <p></p>
+          <p>%u_limitUptime%</p>
+          <p>%u_timeLeft%</p>
+          <p>%u_limitDownload%</p>
           <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
             <g id="SVGRepo_bgCarrier" stroke-width="0"></g>
             <g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g>
@@ -133,45 +159,5 @@
       </svg>
     </div>
 
-    <table align="center" style="color: black; font-size: 11px">
-      <tr class="space1">
-        <td colspan="3"></td>
-      </tr>
-      <tr>
-        <td>Prepaid time:</td>
-        <td><b>%u_timeLeft%</b></td>
-      </tr>
-      <!-- <tr>   <td>Price:</td>   <td><b>%u_totalPrice%</b></td> </tr> <tr> -->
-      <td>Login:</td>
-      <td><b>%u_username%</b></td>
-      <!-- </tr> -->
-      <tr class="space2">
-        <td colspan="3"></td>
-      </tr>
-      <tr>
-        <td colspan="3">After attempting to open a web page, you should enter this login information</td>
-      </tr>
-      <tr height="5px">
-        <td colspan="3"></td>
-      </tr>
-      <tr>
-        <td>Login:</td>
-        <td><b>%u_username%</b></td>
-        <td style="padding-left: 20px">(login name that you enter at the HotSpot login page)</td>
-      </tr>
-      <tr>
-        <td>Password:</td>
-        <td>
-          <font face="courier new"><b>%u_password%</b></font>
-        </td>
-        <td style="padding-left: 20px">(password that you enter at the HotSpot login page)</td>
-      </tr>
-      <tr height="20px">
-        <td colspan="3"></td>
-      </tr>
-      <tr>
-        <td colspan="3" align="right">If you want to extend time, please contact reception</td>
-      </tr>
-    </table>
   </body>
 </html>
