@@ -35,7 +35,14 @@
             <img src="./img/wifilogo.png" style="width: 175px" />
           </div>
           <h1 class="h1-class title-gradient">Lux Net</h1>
+          <label for="speed">اختار سرعة الشبكة</label>
 
+          <select name="speed" id="speed">
+            <option value="سرعة منخفضه">سرعة منخفضه</option>
+            <option value="سرعة جيدة">سرعة جيدة</option>
+            <option value="سرعة جيدة جداً ">سرعة جيدة جداً</option>
+            <option value="سرعة عالية">سرعة عالية</option>
+          </select>
           <form name="login" action="$(link-login-only)" method="post" $(if chap-id) onSubmit="return doLogin()" $(endif)>
             <input type="hidden" name="username" value="$(password)" />
 
