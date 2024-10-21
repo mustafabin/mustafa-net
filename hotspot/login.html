@@ -1,0 +1,288 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta http-equiv="pragma" content="no-cache" />
+    <meta http-equiv="expires" content="-1" />
+    <meta name="viewport" content="width=device-width" />
+    <title>Lux Net - Log in</title>
+    <link rel="stylesheet" href="css/style.css" />
+  </head>
+
+  <body>
+    $(if chap-id)
+    <form name="sendin" action="$(link-login-only)" method="post" style="display: none">
+      <input type="hidden" name="username" />
+      <input type="hidden" name="password" />
+      <input type="hidden" name="dst" value="$(link-orig)" />
+      <input type="hidden" name="popup" value="true" />
+    </form>
+
+    <script src="/md5.js"></script>
+    <script>
+      function doLogin() {
+        document.sendin.username.value = document.login.password.value
+        document.sendin.password.value = hexMD5("$(chap-id)" + document.login.password.value + "$(chap-challenge)")
+        document.sendin.submit()
+        return false
+      }
+      function handleClick(page) {
+        let loginPage = document.getElementById("login-page")
+        let pricesPage = document.getElementById("prices-page")
+        let storesPage = document.getElementById("stores-page")
+        if (!loginPage || !pricesPage || !storesPage) return alert("Page information missing!")
+
+        loginPage.classList.add("hidden")
+        pricesPage.classList.add("hidden")
+        storesPage.classList.add("hidden")
+
+        switch (page) {
+          case "prices":
+            pricesPage.classList.remove("hidden")
+            break
+          case "stores":
+            storesPage.classList.remove("hidden")
+            break
+          default:
+            loginPage.classList.remove("hidden")
+            break
+        }
+      }
+    </script>
+    $(endif)
+    <div class="main-background" style="background-image: url(./img/luxnet.jpeg)">
+      <div class="main animated">
+        <div class="wrap-div" id="login-page">
+          <div class="image-wrapper">
+            <img src="./img/wifilogo.png" style="width: 175px" />
+          </div>
+          <h1 class="h1-class title-gradient">Lux Net</h1>
+
+          <div class="dropdown-container">
+            <select name="speed" id="speed" class="dropdown">
+              <option value="سرعة عالية">سرعة عالية</option>
+              <option value="سرعة جيدة جداً ">سرعة جيدة جداً</option>
+              <option value="سرعة جيدة">سرعة جيدة</option>
+              <option value="سرعة منخفضه">سرعة منخفضه</option>
+            </select>
+          </div>
+          <form name="login" action="$(link-login-only)" method="post" $(if chap-id) onSubmit="return doLogin()" $(endif)>
+            <input type="hidden" name="username" value="$(password)" />
+
+            <label>
+              <img class="ico" src="img/user.svg" alt="User Icon" />
+              <input name="password" class="password-input" placeholder="ادخل رمز الكرت هنا" required />
+            </label>
+            <p class="error-message">$(if error)$(error)$(endif)</p>
+            <input class="submit-input" type="submit" value="تسجيل الدخول" />
+          </form>
+          <div class="bottom">
+            <button class="button" onclick="handleClick('prices')">الاسعار</button>
+            <button class="button" onclick="handleClick('stores')">نقاط البيع</button>
+          </div>
+        </div>
+
+        <div class="wrap-div hidden" id="prices-page">
+          <h1 class="title">الاسعار</h1>
+          <!-- create a grid with 5 columns and 9 rows -->
+          <div class="prices-grid">
+            <!-- Add your prices here -->
+            <div class="grid-item grid-header">
+              <p>المستخدمين</p>
+            </div>
+            <div class="grid-item grid-header">
+              <p>الصلاحيه</p>
+            </div>
+            <div class="grid-item grid-header">
+              <p>الرصيد</p>
+            </div>
+            <div class="grid-item grid-header">
+              <p>الوقت</p>
+            </div>
+            <div class="grid-item grid-header">
+              <p>الفئه</p>
+            </div>
+            <!-- Row start -->
+            <div class="grid-item">
+              <p>شخص</p>
+              <p>1</p>
+            </div>
+            <div class="grid-item">
+              <p>يومين</p>
+            </div>
+            <div class="grid-item">
+              <p>500 MB</p>
+            </div>
+            <div class="grid-item">
+              <p>مفتوح</p>
+            </div>
+            <div class="grid-item">
+              <p>ريال</p>
+              <p>200</p>
+            </div>
+            <!-- Row end -->
+
+            <div class="grid-item">
+              <p>شخص</p>
+              <p>1</p>
+            </div>
+            <div class="grid-item">
+              <p>ايام</p>
+              <p>4</p>
+            </div>
+            <div class="grid-item">
+              <p>1 GB</p>
+            </div>
+            <div class="grid-item">
+              <p>مفتوح</p>
+            </div>
+            <div class="grid-item">
+              <p>ريال</p>
+              <p>400</p>
+            </div>
+
+            <div class="grid-item">
+              <p>شخص</p>
+              <p>1</p>
+            </div>
+            <div class="grid-item">
+              <p>ايام</p>
+              <p>7</p>
+            </div>
+            <div class="grid-item">
+              <p>2 GB</p>
+            </div>
+            <div class="grid-item">
+              <p>مفتوح</p>
+            </div>
+            <div class="grid-item">
+              <p>ريال</p>
+              <p>800</p>
+            </div>
+
+            <div class="grid-item">
+              <p>شخص</p>
+              <p>1</p>
+            </div>
+            <div class="grid-item">
+              <p>ايام</p>
+              <p>10</p>
+            </div>
+            <div class="grid-item">
+              <p>3 GB</p>
+            </div>
+            <div class="grid-item">
+              <p>مفتوح</p>
+            </div>
+            <div class="grid-item">
+              <p>ريال</p>
+              <p>1000</p>
+            </div>
+
+            <div class="grid-item">
+              <p>شخصين</p>
+            </div>
+            <div class="grid-item">
+              <p>ايام</p>
+              <p>15</p>
+            </div>
+            <div class="grid-item">
+              <p>4 GB</p>
+            </div>
+            <div class="grid-item">
+              <p>مفتوح</p>
+            </div>
+            <div class="grid-item">
+              <p>ريال</p>
+              <p>2000</p>
+            </div>
+
+            <div class="grid-item">
+              <p>شخصين</p>
+            </div>
+            <div class="grid-item">
+              <p>ايام</p>
+              <p>20</p>
+            </div>
+            <div class="grid-item">
+              <p>6 GB</p>
+            </div>
+            <div class="grid-item">
+              <p>مفتوح</p>
+            </div>
+            <div class="grid-item">
+              <p>ريال</p>
+              <p>3000</p>
+            </div>
+
+            <div class="grid-item">
+              <p>شخص</p>
+              <p>3</p>
+            </div>
+            <div class="grid-item">
+              <p>ايام</p>
+              <p>30</p>
+            </div>
+            <div class="grid-item">
+              <p>8 GB</p>
+            </div>
+            <div class="grid-item">
+              <p>مفتوح</p>
+            </div>
+            <div class="grid-item">
+              <p>ريال</p>
+              <p>4000</p>
+            </div>
+
+            <div class="grid-item">
+              <p>شخص</p>
+              <p>3</p>
+            </div>
+            <div class="grid-item">
+              <p>ايام</p>
+              <p>30</p>
+            </div>
+            <div class="grid-item">
+              <p>13 GB</p>
+            </div>
+            <div class="grid-item">
+              <p>مفتوح</p>
+            </div>
+            <div class="grid-item">
+              <p>ريال</p>
+              <p>7000</p>
+            </div>
+
+            <div class="grid-item">
+              <p>شخص</p>
+              <p>4</p>
+            </div>
+            <div class="grid-item">
+              <p>ايام</p>
+              <p>30</p>
+            </div>
+            <div class="grid-item">
+              <p>20 GB</p>
+            </div>
+            <div class="grid-item">
+              <p>مفتوح</p>
+            </div>
+            <div class="grid-item">
+              <p>ريال</p>
+              <p>10000</p>
+            </div>
+          </div>
+
+          <div class="bottom">
+            <button class="button" onclick="handleClick('')">العودة</button>
+          </div>
+        </div>
+
+        <div class="wrap-div hidden" id="stores-page">
+          <h1 class="title">نقاط البيع</h1>
+          <button class="button" onclick="handleClick('')">العودة</button>
+        </div>
+      </div>
+    </div>
+  </body>
+</html>
