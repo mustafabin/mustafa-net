@@ -4,7 +4,7 @@ $(if refresh-timeout)
 <meta http-equiv="refresh" content="$(refresh-timeout-secs)">
 $(endif)
 <meta charset="utf-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0" />   
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
 <meta http-equiv="pragma" content="no-cache">
 <meta http-equiv="expires" content="-1">
 <title>Internet hotspot - Status</title>
@@ -28,7 +28,7 @@ $(endif)
 	return false;
     }
 </script>
-    
+
 </head>
 <body $(if advert-pending == 'yes') onLoad="openAdvert()" $(endif)>
     <div class="ie-fixMinHeight">
@@ -38,7 +38,7 @@ $(endif)
                     <h1>Hi, trial user!</h1>
                 $(elif login-by != 'mac')
                     <h1>Hi, $(username)!</h1>
-                $(endif)                
+                $(endif)
 
                 <form action="$(link-logout)" name="logout" onSubmit="return openLogout()">
                     <table>
